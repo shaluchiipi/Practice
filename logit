@@ -1,0 +1,26 @@
+import datetime
+from dateutil.rrule import rrule, MONTHLY,DAILY,YEARLY
+import pandas as pd
+
+strt_dt = datetime.date(2014,12,4)
+end_dt = datetime.date(2015,2,11)
+
+dates = [dt for dt in rrule(DAILY, dtstart=strt_dt, until=end_dt)]
+l=len(dates)
+d=0
+m=dates[0].month
+m1=m
+ym=[]
+for i in range(0,l):
+    y=dates[i].year
+    m=dates[i].month
+    ym[j]=str(y)+'-'+str(m)
+    if m==m1:
+        d=d+1
+    else:
+        print(ym)
+        data = [[ym,d]]
+        df = pd.DataFrame(data,columns=['year_Month','days_Cal'])
+        d=0
+        m1=m
+print (df)
